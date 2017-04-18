@@ -1,0 +1,16 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "Launch Electron App",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/dist/app.js",
+            "preLaunchTask": "build",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd",
+            "runtimeArgs": [
+                "--nolazy"
+            ]
+        }
+    ]
+}
