@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from './actions';
-import * as reducers from './reducers';
+import * as actions from '../actions';
+import * as reducers from '../reducers';
 import * as paths from 'path';
 
 interface ListViewPropValues extends React.Props<ListView> {

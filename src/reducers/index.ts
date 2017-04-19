@@ -1,4 +1,4 @@
-import { AlberoServer } from '../AlberoServer'
+import { AlberoServer } from '../library/AlberoServer'
 import * as paths from 'path';
 
 import {

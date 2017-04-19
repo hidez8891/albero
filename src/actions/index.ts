@@ -1,4 +1,4 @@
-import { AlberoServer } from '../AlberoServer'
+import { AlberoServer } from '../library/AlberoServer'
 import * as ospath from 'path';
 
 export const SELECT_PATH = 'SELECT_PATH';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as reducers from './reducers';
-import { AlberoServer } from './AlberoServer'
+import * as reducers from '../reducers';
+import { AlberoServer } from '../library/AlberoServer'
 
 interface ImageViewPropValues extends React.Props<ImageView> {
     url: string;

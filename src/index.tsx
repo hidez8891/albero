@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
 import * as reducers from './reducers';
-import AlberoApp from './AlberoApp';
+import AlberoApp from './containers/AlberoApp';
 
 const store = createStore(
     reducers.default,
