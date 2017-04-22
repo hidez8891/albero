@@ -5,11 +5,17 @@
             "name": "Launch Electron App",
             "type": "node",
             "request": "launch",
+            "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/dist/app.js",
-            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
             "runtimeArgs": [
-                "--nolazy"
-            ]
+                "--nolazy",
+                "--enable-logging"
+            ],
+            "windows": {
+                "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+            },
+            "console": "integratedTerminal"
         }
     ]
 }
