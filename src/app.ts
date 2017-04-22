@@ -1,19 +1,19 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow } from "electron";
 
 let mainWindow: Electron.BrowserWindow = null;
 
-app.on('window-all-closed', () => {
-    if (process.platform != 'darwin') {
+app.on("window-all-closed", () => {
+    if (process.platform != "darwin") {
         app.quit();
     }
 });
 
-app.on('ready', () => {
+app.on("ready", () => {
     mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
     mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    mainWindow.on('closed', () => {
+    mainWindow.on("closed", () => {
         mainWindow = null;
     });
 });

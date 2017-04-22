@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-import * as reducers from '../reducers';
-import * as paths from 'path';
+import * as paths from "path";
+import * as React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from "../actions";
+import * as reducers from "../reducers";
 
 interface ListViewPropValues extends React.Props<ListView> {
     url: string;
@@ -14,9 +14,9 @@ interface ListViewPropValues extends React.Props<ListView> {
 }
 
 interface ListViewPropFunctions extends React.Props<ListView> {
-    openPath: (string) => any
-    selectNextFile: () => any
-    selectPreviousFile: () => any
+    openPath: (string) => any;
+    selectNextFile: () => any;
+    selectPreviousFile: () => any;
 }
 
 interface ListViewProps extends ListViewPropValues, ListViewPropFunctions {
@@ -65,11 +65,11 @@ class ListView extends React.Component<ListViewProps, undefined> {
                     {name}
                 </td>
             </tr>
-        )
+        );
     }
 
     componentDidUpdate() {
-        const actives = document.getElementsByClassName('active');
+        const actives = document.getElementsByClassName("active");
         if (actives.length === 0) { return; }
 
         const active = actives[0] as HTMLElement;
@@ -78,7 +78,7 @@ class ListView extends React.Component<ListViewProps, undefined> {
 
     render(): JSX.Element {
         const className = `file-listview ${this.props.className}`;
-        const files = [].concat(this.props.archs, this.props.files).sort()
+        const files = [].concat(this.props.archs, this.props.files).sort();
         return (
             <div className={className}>
                 <table className="table">

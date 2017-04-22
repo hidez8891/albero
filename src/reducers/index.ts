@@ -1,16 +1,16 @@
-import { AlberoServer } from '../library/AlberoServer'
-import * as paths from 'path';
+import * as paths from "path";
+import { AlberoServer } from "../library/AlberoServer";
 
 import {
     ActionHash,
-    SELECT_PATH, SELECT_NEXT_FILE, SELECT_PREVIOUS_FILE, UPDATE_FILES
-} from '../actions';
+    SELECT_NEXT_FILE, SELECT_PATH, SELECT_PREVIOUS_FILE, UPDATE_FILES,
+} from "../actions";
 
 export interface ActionState {
-    selectedFile: string
-    dirs: string[]
-    archs: string[]
-    files: string[]
+    selectedFile: string;
+    dirs: string[];
+    archs: string[];
+    files: string[];
 }
 
 export const InitialActionState: ActionState = {
@@ -18,7 +18,7 @@ export const InitialActionState: ActionState = {
     dirs: [],
     archs: [],
     files: [],
-}
+};
 
 const getNearFilePath = (state: ActionState, dx: number): string => {
     const { files, selectedFile } = state;
@@ -35,14 +35,14 @@ const getNearFilePath = (state: ActionState, dx: number): string => {
         index = files.length - 1; // last index
     }
     return files[index];
-}
+};
 
 export default (state: ActionState, action: ActionHash): ActionState => {
     let { path, filemap } = action;
 
     if (typeof path !== "undefined") {
         path = paths.normalize(path);
-        path = path.replace(/\\/g, '/');
+        path = path.replace(/\\/g, "/");
     }
 
     switch (action.type) {
@@ -62,4 +62,4 @@ export default (state: ActionState, action: ActionHash): ActionState => {
         default:
             return state;
     }
-}
+};

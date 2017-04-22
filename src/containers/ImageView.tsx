@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import * as reducers from '../reducers';
-import { AlberoServer } from '../library/AlberoServer'
+import * as React from "react";
+import { connect } from "react-redux";
+import { AlberoServer } from "../library/AlberoServer";
+import * as reducers from "../reducers";
 
 interface ImageViewPropValues extends React.Props<ImageView> {
     url: string;
@@ -22,11 +22,11 @@ class ImageView extends React.Component<ImageViewProps, undefined> {
     render(): JSX.Element {
         let img = null;
         if (this.props.url.length !== 0) {
-            let url = AlberoServer.toImgURL(this.props.url);
-            img = <img src={url} />
+            const url = AlberoServer.toImgURL(this.props.url);
+            img = <img src={url} />;
         }
 
-        let className = `image-view ${this.props.className}`;
+        const className = `image-view ${this.props.className}`;
         return (
             <div className={className}>
                 {img}

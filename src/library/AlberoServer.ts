@@ -1,19 +1,19 @@
-import { spawn, ChildProcess } from 'child_process';
+import { ChildProcess, spawn } from "child_process";
 import * as http from "http";
 
 export class AlberoServer {
-    private static server_path = './vendor/albero-server/albero-server.exe';
-    private static server_url = 'http://localhost:5358';
+    private static server_path = "./vendor/albero-server/albero-server.exe";
+    private static server_url = "http://localhost:5358";
     private process: ChildProcess = null;
     private support_type: Map<string, string[]> = null;
 
     static toImgURL(path: string): string {
-        return this.server_url + '/img/' + encodeURIComponent(path);
+        return this.server_url + "/img/" + encodeURIComponent(path);
     }
 
     run() {
         this.process = spawn(AlberoServer.server_path, []);
-        this.process.on('close', (code: number) => {
+        this.process.on("close", (code: number) => {
             console.log(`server process exited ${code}`);
         });
     }
@@ -23,25 +23,25 @@ export class AlberoServer {
     }
 
     async supportType(): Promise<Map<string, string[]>> {
-        const url = AlberoServer.server_url + '/support';
+        const url = AlberoServer.server_url + "/support";
 
         if (typeof this.support_type === "undefined") {
-            let data = await this.getData(url);
+            const data = await this.getData(url);
             this.support_type = JSON.parse(data);
         }
         return this.support_type;
     }
 
     async readDir(path: string): Promise<Map<string, string[]>> {
-        let url = AlberoServer.server_url + '/fs/' + encodeURIComponent(path);
-        let data = await this.getData(url);
+        const url = AlberoServer.server_url + "/fs/" + encodeURIComponent(path);
+        const data = await this.getData(url);
         return JSON.parse(data);
     }
 
     async isFile(path: string): Promise<boolean> {
         return this.readDir(path)
-            .then(m => false)
-            .catch(e => true);
+            .then((m) => false)
+            .catch((e) => true);
     }
 
     private getData(url: string): Promise<string> {
@@ -49,12 +49,12 @@ export class AlberoServer {
             http.get(url, (res) => {
                 let data = "";
 
-                res.setEncoding('utf8');
-                res.on('data', (chunk: http.IncomingMessage) => { data += chunk });
-                res.on('end', (res: http.IncomingMessage) => {
+                res.setEncoding("utf8");
+                res.on("data", (chunk: http.IncomingMessage) => { data += chunk; });
+                res.on("end", (res: http.IncomingMessage) => {
                     resolve(data);
-                })
-            }).on('error', (e) => {
+                });
+            }).on("error", (e) => {
                 console.log(`server error ${e.message}`);
                 reject(e.message);
             });

@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-import * as reducers from '../reducers';
-import ListView from './ListView';
-import ImageView from './ImageView';
+import * as React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from "../actions";
+import * as reducers from "../reducers";
+import ImageView from "./ImageView";
+import ListView from "./ListView";
 
 interface AlberoAppPropValues extends React.Props<AlberoApp> {
 }
 
 interface AlberoAppPropFunctions extends React.Props<AlberoApp> {
-    openPath: (string) => any
+    openPath: (string) => any;
 }
 
 interface AlberoAppProps extends AlberoAppPropValues, AlberoAppPropFunctions {
@@ -29,9 +29,9 @@ class AlberoApp extends React.Component<AlberoAppProps, undefined> {
     }
 
     _getDropFilePath(e: DragEvent): boolean {
-        let files = e.dataTransfer.files;
+        const files = e.dataTransfer.files;
         if (files.length > 0) {
-            let path = e.dataTransfer.files.item(0).path;
+            const path = e.dataTransfer.files.item(0).path;
             this.props.openPath(path);
         }
 
