@@ -8,7 +8,9 @@
     "build:typescript": "tsc",
     "build:pug": "pug -o dist src",
     "build:scss": "node-sass -o dist -r src",
-    "prestart": "npm run build",
+    "watch": "npm-run-all watch:*",
+    "watch:typescript": "tsc --watch",
+    "watch:scss": "node-sass --watch -o dist -r src",
     "start": "electron .",
     "package": "node package.js",
     "lint": "tslint src/**/*.ts?(x)"
