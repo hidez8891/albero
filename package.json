@@ -13,7 +13,7 @@
     "watch:scss": "node-sass --watch -o dist -r src",
     "start": "electron .",
     "package": "node build.js",
-    "lint": "tslint src/**/*.ts?(x)"
+    "lint": "tslint --force --fix \"src/**/*.ts?(x)\""
   },
   "keywords": [],
   "author": "hidez8891",
