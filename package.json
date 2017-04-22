@@ -12,7 +12,7 @@
     "watch:typescript": "tsc --watch",
     "watch:scss": "node-sass --watch -o dist -r src",
     "start": "electron .",
-    "package": "node package.js",
+    "package": "node build.js",
     "lint": "tslint src/**/*.ts?(x)"
   },
   "keywords": [],
