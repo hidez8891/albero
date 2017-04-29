@@ -1,0 +1,3 @@
+[submodule "vendor/albero-server"]
+	path = vendor/albero-server
+	url = https://github.com/hidez8891/albero-server
