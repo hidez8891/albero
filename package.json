@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
+    "init": "git submodule update -i",
     "build": "npm-run-all build:*",
     "build:typescript": "tsc",
     "build:pug": "pug -o dist src",
