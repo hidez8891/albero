@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import * as actions from "../actions";
 import * as reducers from "../reducers";
 
-interface ListViewPropValues extends React.Props<ListView> {
+interface IListViewPropValues extends React.Props<ListView> {
     url: string;
     dirs: string[];
     archs: string[];
@@ -13,62 +13,25 @@ interface ListViewPropValues extends React.Props<ListView> {
     className?: string;
 }
 
-interface ListViewPropFunctions extends React.Props<ListView> {
-    openPath: (string) => any;
+interface IListViewPropFunctions extends React.Props<ListView> {
+    openPath: (path: string) => any;
     selectNextFile: () => any;
     selectPreviousFile: () => any;
 }
 
-interface ListViewProps extends ListViewPropValues, ListViewPropFunctions {
+interface IListViewProps extends IListViewPropValues, IListViewPropFunctions {
 }
 
-class ListView extends React.Component<ListViewProps, undefined> {
-    constructor(props: ListViewProps) {
+class ListView extends React.Component<IListViewProps, undefined> {
+    constructor(props: IListViewProps) {
         super(props);
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         document.addEventListener("keydown", this._getKeyEvent.bind(this));
     }
 
-    _getKeyEvent(e: KeyboardEvent) {
-        switch (e.which) {
-            case 38: // Up :: previous image
-                this.props.selectPreviousFile();
-                e.preventDefault();
-                break;
-            case 40: // Down :: next image
-                this.props.selectNextFile();
-                e.preventDefault();
-                break;
-            default:
-                break;
-        }
-    }
-
-    _onClick(e: React.MouseEvent<HTMLTableRowElement>) {
-        const path = e.currentTarget.getAttribute("data-path");
-        this.props.openPath(path);
-    }
-
-    _renderChild(path: string): JSX.Element {
-        let className = "";
-        if (path === this.props.url) {
-            className = "active";
-        }
-
-        const name = paths.basename(path);
-        return (
-            <tr key={path} className={className}
-                data-path={path} onClick={this._onClick.bind(this)}>
-                <td>
-                    {name}
-                </td>
-            </tr>
-        );
-    }
-
-    componentDidUpdate() {
+    public componentDidUpdate() {
         const actives = document.getElementsByClassName("active");
         if (actives.length === 0) { return; }
 
@@ -76,7 +39,7 @@ class ListView extends React.Component<ListViewProps, undefined> {
         scrollIntoViewEx(active);
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const className = `file-listview ${this.props.className}`;
         const files = [].concat(this.props.archs, this.props.files).sort();
         return (
@@ -93,6 +56,43 @@ class ListView extends React.Component<ListViewProps, undefined> {
                     </tbody>
                 </table>
             </div>
+        );
+    }
+
+    private _getKeyEvent(e: KeyboardEvent) {
+        switch (e.which) {
+            case 38: // Up :: previous image
+                this.props.selectPreviousFile();
+                e.preventDefault();
+                break;
+            case 40: // Down :: next image
+                this.props.selectNextFile();
+                e.preventDefault();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private _onClick(e: React.MouseEvent<HTMLTableRowElement>) {
+        const path = e.currentTarget.getAttribute("data-path");
+        this.props.openPath(path);
+    }
+
+    private _renderChild(path: string): JSX.Element {
+        let className = "";
+        if (path === this.props.url) {
+            className = "active";
+        }
+
+        const name = paths.basename(path);
+        return (
+            <tr key={path} className={className}
+                data-path={path} onClick={this._onClick.bind(this)}>
+                <td>
+                    {name}
+                </td>
+            </tr>
         );
     }
 }
@@ -127,7 +127,7 @@ function scrollIntoViewEx(elem: HTMLElement) {
     }
 }
 
-function mapStateToProps(state: reducers.ActionState): ListViewPropValues {
+function mapStateToProps(state: reducers.IActionState): IListViewPropValues {
     return {
         url: state.selectedFile,
         dirs: state.dirs,
@@ -136,7 +136,7 @@ function mapStateToProps(state: reducers.ActionState): ListViewPropValues {
     };
 }
 
-function mapDispatchToProps(dispatch): ListViewPropFunctions {
+function mapDispatchToProps(dispatch): IListViewPropFunctions {
     return {
         openPath: bindActionCreators(actions.openPath, dispatch),
         selectNextFile: bindActionCreators(actions.selectNextFile, dispatch),

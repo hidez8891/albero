@@ -3,7 +3,7 @@ import { app, BrowserWindow } from "electron";
 let mainWindow: Electron.BrowserWindow = null;
 
 app.on("window-all-closed", () => {
-    if (process.platform != "darwin") {
+    if (process.platform !== "darwin") {
         app.quit();
     }
 });

@@ -9,27 +9,27 @@ export const UPDATE_FILES = "UPDATE_FILES";
 const alberofs = new AlberoServer();
 alberofs.run();
 
-export interface ActionHash {
+export interface IActionHash {
     type: string;
     path?: string;
     filemap?: Map<string, string[]>;
 }
 
-const selectPath = (path: string): ActionHash => ({
+const selectPath = (path: string): IActionHash => ({
     type: SELECT_PATH,
     path,
 });
 
-const updateFiles = (filemap: Map<string, string[]>): ActionHash => ({
+const updateFiles = (filemap: Map<string, string[]>): IActionHash => ({
     type: UPDATE_FILES,
     filemap,
 });
 
-export const selectNextFile = (): ActionHash => ({
+export const selectNextFile = (): IActionHash => ({
     type: SELECT_NEXT_FILE,
 });
 
-export const selectPreviousFile = (): ActionHash => ({
+export const selectPreviousFile = (): IActionHash => ({
     type: SELECT_PREVIOUS_FILE,
 });
 

@@ -2,25 +2,25 @@ import * as paths from "path";
 import { AlberoServer } from "../library/AlberoServer";
 
 import {
-    ActionHash,
+    IActionHash,
     SELECT_NEXT_FILE, SELECT_PATH, SELECT_PREVIOUS_FILE, UPDATE_FILES,
 } from "../actions";
 
-export interface ActionState {
+export interface IActionState {
     selectedFile: string;
     dirs: string[];
     archs: string[];
     files: string[];
 }
 
-export const InitialActionState: ActionState = {
+export const InitialActionState: IActionState = {
     selectedFile: "",
     dirs: [],
     archs: [],
     files: [],
 };
 
-const getNearFilePath = (state: ActionState, dx: number): string => {
+const getNearFilePath = (state: IActionState, dx: number): string => {
     const { files, selectedFile } = state;
     if (files.length === 0) { return ""; }
 
@@ -37,8 +37,9 @@ const getNearFilePath = (state: ActionState, dx: number): string => {
     return files[index];
 };
 
-export default (state: ActionState, action: ActionHash): ActionState => {
-    let { path, filemap } = action;
+export default (state: IActionState, action: IActionHash): IActionState => {
+    let { path } = action;
+    const { filemap } = action;
 
     if (typeof path !== "undefined") {
         path = paths.normalize(path);

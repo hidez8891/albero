@@ -3,23 +3,23 @@ import { connect } from "react-redux";
 import { AlberoServer } from "../library/AlberoServer";
 import * as reducers from "../reducers";
 
-interface ImageViewPropValues extends React.Props<ImageView> {
+interface IImageViewPropValues extends React.Props<ImageView> {
     url: string;
     className?: string;
 }
 
-interface ImageViewPropFunctions extends React.Props<ImageView> {
+interface IImageViewPropFunctions extends React.Props<ImageView> {
 }
 
-interface ImageViewProps extends ImageViewPropValues, ImageViewPropFunctions {
+interface IImageViewProps extends IImageViewPropValues, IImageViewPropFunctions {
 }
 
-class ImageView extends React.Component<ImageViewProps, undefined> {
-    constructor(props: ImageViewProps) {
+class ImageView extends React.Component<IImageViewProps, undefined> {
+    constructor(props: IImageViewProps) {
         super(props);
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         let img = null;
         if (this.props.url.length !== 0) {
             const url = AlberoServer.toImgURL(this.props.url);
@@ -35,11 +35,11 @@ class ImageView extends React.Component<ImageViewProps, undefined> {
     }
 }
 
-function mapStateToProps(state: reducers.ActionState): ImageViewPropValues {
+function mapStateToProps(state: reducers.IActionState): IImageViewPropValues {
     return { url: state.selectedFile };
 }
 
-function mapDispatchToProps(dispatch): ImageViewPropFunctions {
+function mapDispatchToProps(dispatch): IImageViewPropFunctions {
     return {};
 }
 
