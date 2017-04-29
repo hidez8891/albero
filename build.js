@@ -11,7 +11,8 @@ packager({
     asar: true,
     download: "cache"
 }, (err, appPaths) => {
-    if (err)
+    if (err) {
         console.log(err);
+    }
     console.log(`Finish: ${appPaths}`);
 });
