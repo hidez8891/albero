@@ -1,0 +1,41 @@
+{
+  "name": "albero",
+  "version": "0.2.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:typescript": "tsc",
+    "build:pug": "pug -o dist src",
+    "build:scss": "node-sass -o dist -r src",
+    "watch": "npm-run-all watch:*",
+    "watch:typescript": "tsc --watch",
+    "watch:scss": "node-sass --watch -o dist -r src",
+    "start": "electron .",
+    "package": "node build.js",
+    "lint": "tslint --force --fix \"src/**/*.ts?(x)\""
+  },
+  "keywords": [],
+  "author": "hidez8891",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^1.6.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.4.36",
+    "@types/react": "^15.0.22",
+    "@types/react-dom": "^0.14.23",
+    "@types/underscore": "^1.8.0",
+    "electron-packager": "^8.6.0",
+    "node-sass": "^4.5.2",
+    "npm-run-all": "^4.0.2",
+    "sync-request": "^4.0.2",
+    "tslint": "^5.1.0",
+    "typescript": "^2.2.2"
+  }
+}
