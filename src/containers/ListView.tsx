@@ -1,9 +1,16 @@
 import * as paths from "path";
 import * as React from "react";
+import FontAwesome = require("react-fontawesome");
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../actions";
 import * as reducers from "../reducers";
+
+enum IconType {
+    Dir = 1,
+    Arch,
+    File,
+}
 
 interface IListViewPropValues extends React.Props<ListView> {
     url: string;
@@ -41,7 +48,17 @@ class ListView extends React.Component<IListViewProps, undefined> {
 
     public render(): JSX.Element {
         const className = `file-listview ${this.props.className}`;
-        const files = [].concat(this.props.archs, this.props.files).sort();
+        const { archs, files } = this.props;
+
+        const renderDirs = this.props.dirs.map((x) => this._renderChild(x, IconType.Dir));
+        const renderFiles = [].concat(archs, files).sort().map((path) => {
+            if (files.indexOf(path) < 0) {
+                return this._renderChild(path, IconType.Arch);
+            } else {
+                return this._renderChild(path, IconType.File);
+            }
+        });
+
         return (
             <div className={className}>
                 <table className="table">
@@ -51,8 +68,8 @@ class ListView extends React.Component<IListViewProps, undefined> {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.dirs.map(this._renderChild.bind(this))}
-                        {files.map(this._renderChild.bind(this))}
+                        {renderDirs}
+                        {renderFiles}
                     </tbody>
                 </table>
             </div>
@@ -79,10 +96,30 @@ class ListView extends React.Component<IListViewProps, undefined> {
         this.props.openPath(path);
     }
 
-    private _renderChild(path: string): JSX.Element {
+    private _renderChild(path: string, type: IconType): JSX.Element {
         let className = "";
         if (path === this.props.url) {
             className = "active";
+        }
+
+        let icon: string;
+        switch (type) {
+            case IconType.Dir: {
+                icon = "folder";
+                break;
+            }
+            case IconType.Arch: {
+                icon = "archive";
+                break;
+            }
+            case IconType.File: {
+                icon = "file-picture-o";
+                break;
+            }
+            default: {
+                icon = "file";
+                break;
+            }
         }
 
         const name = paths.basename(path);
@@ -90,6 +127,7 @@ class ListView extends React.Component<IListViewProps, undefined> {
             <tr key={path} className={className}
                 data-path={path} onClick={this._onClick.bind(this)}>
                 <td>
+                    <FontAwesome name={icon} />
                     {name}
                 </td>
             </tr>
